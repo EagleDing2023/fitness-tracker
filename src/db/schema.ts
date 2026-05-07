@@ -1,4 +1,5 @@
 import { pgTable, uuid, timestamp, integer, text, numeric, index } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 export const sessions = pgTable("sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -21,6 +22,14 @@ export const sets = pgTable(
   },
   (t) => [index("sets_session_idx").on(t.sessionId)]
 );
+
+export const sessionsRelations = relations(sessions, ({ many }) => ({
+  sets: many(sets),
+}));
+
+export const setsRelations = relations(sets, ({ one }) => ({
+  session: one(sessions, { fields: [sets.sessionId], references: [sessions.id] }),
+}));
 
 export type Session = typeof sessions.$inferSelect;
 export type Set = typeof sets.$inferSelect;
