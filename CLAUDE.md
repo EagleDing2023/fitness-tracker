@@ -32,4 +32,7 @@ A minimal workout tracking app where users log exercises (name, sets, reps) duri
 - DB tables: snake_case, plural. RLS disabled (no auth in v1).
 - Test files: co-located, `*.test.ts(x)`.
 
+## Deployed at
+https://fitness-tracker-six-zeta.vercel.app
+
 ## Gotchas
